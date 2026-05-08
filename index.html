@@ -3,58 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RCM & Medical Billing Test</title>
+    <title>Medical Billing Quiz</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f0f2f5; padding: 20px; }
-        .container { max-width: 800px; margin: auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
-        h1 { text-align: center; color: #1a73e8; margin-bottom: 30px; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f0f2f5; padding: 20px; color: #202124; }
+        .container { max-width: 850px; margin: auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .header-box { text-align: center; border-bottom: 2px solid #1a73e8; margin-bottom: 30px; padding-bottom: 10px; }
         
-        #start-screen { text-align: center; padding: 50px 20px; }
-        .btn-start { background-color: #1a73e8; color: white; padding: 15px 40px; border: none; border-radius: 30px; font-size: 20px; cursor: pointer; transition: 0.3s; }
-        .btn-start:hover { background-color: #1557b0; transform: scale(1.05); }
+        #name-screen, #quiz-area, #result { display: none; }
 
-        #quiz-area { display: none; }
-        #timer { position: fixed; top: 20px; right: 20px; background: #d93025; color: white; padding: 12px 25px; border-radius: 50px; font-weight: bold; font-size: 22px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); z-index: 1000; }
-        .question { margin-bottom: 30px; padding: 20px; border-left: 5px solid #1a73e8; background: #f8f9fa; border-radius: 4px; }
-        .options label { display: block; margin: 10px 0; padding: 12px; cursor: pointer; background: white; border: 1px solid #ddd; border-radius: 8px; transition: 0.2s; }
-        .options label:hover { background: #e8f0fe; border-color: #1a73e8; }
+        /* General UI */
+        .btn-primary { background-color: #1a73e8; color: white; padding: 15px 60px; border: none; border-radius: 30px; font-size: 18px; cursor: pointer; font-weight: bold; }
+        input[type="text"] { width: 80%; padding: 15px; border: 2px solid #ddd; border-radius: 8px; font-size: 18px; margin-bottom: 20px; }
+
+        /* Quiz UI */
+        #timer { position: fixed; top: 20px; right: 20px; background: #d93025; color: white; padding: 12px 25px; border-radius: 50px; font-weight: bold; font-size: 22px; z-index: 1000; }
+        .question { margin-bottom: 30px; padding: 25px; border-left: 6px solid #1a73e8; background: #f8f9fa; border-radius: 8px; }
+        .options label { display: block; margin: 12px 0; padding: 14px; cursor: pointer; background: white; border: 1px solid #ddd; border-radius: 10px; }
         
-        #submit-btn { width: 100%; padding: 18px; background: #34a853; color: white; border: none; border-radius: 8px; font-size: 20px; cursor: pointer; margin-top: 20px; font-weight: bold; }
-        #submit-btn:hover { background: #2d8e47; }
+        #submit-btn { width: 100%; padding: 20px; background: #34a853; color: white; border: none; border-radius: 10px; font-size: 22px; cursor: pointer; font-weight: bold; }
 
-        #result { display: none; text-align: center; padding: 60px 20px; border-radius: 12px; }
-        .score-box { font-size: 64px; font-weight: bold; color: #1a73e8; margin: 20px 0; }
-        .percentage-text { font-size: 24px; color: #5f6368; margin-bottom: 10px; }
-        .completion-msg { font-size: 20px; color: #34a853; font-weight: 500; }
+        /* Result/Review UI */
+        .review-item { margin-bottom: 15px; padding: 15px; border-radius: 8px; border-width: 1px; border-style: solid; }
+        .correct-review { background: #f0fff4; border-color: #68d391; }
+        .wrong-review { background: #fff5f5; border-color: #feb2b2; }
+        .status-badge { font-weight: bold; text-transform: uppercase; font-size: 12px; padding: 4px 10px; border-radius: 4px; margin-bottom: 8px; display: inline-block; }
+        .badge-correct { background: #c6f6d5; color: #22543d; }
+        .badge-wrong { background: #fed7d7; color: #822727; }
+        .score-box { font-size: 60px; font-weight: bold; color: #1a73e8; text-align: center; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <!-- 1. Start Screen -->
-    <div id="start-screen">
-        <h1>Medical Billing & RCM Test</h1>
-        <p><strong>Total Questions:</strong> 40</p>
-        <p><strong>Time Limit:</strong> 30 Minutes</p>
-    
-        <button class="btn-start" onclick="startQuiz()">Start Quiz Now</button>
+    <div class="header-box">
+        <h1>Medical Billing Course</h1>
+        <h3>Batch-4 Quiz #1</h3>
     </div>
 
-    <!-- 2. Quiz Area -->
+    <!-- Start -->
+    <div id="start-screen" style="text-align: center;">
+        <p>Total MCQs: 40 | Marks: 40 | Time: 30 Mins</p>
+        <button class="btn-primary" onclick="showNameScreen()">Start Quiz</button>
+    </div>
+
+    <!-- Name Input -->
+    <div id="name-screen" style="text-align: center;">
+        <h2>Student Name</h2>
+        <input type="text" id="studentNameInput" placeholder="Enter Full Name">
+        <br>
+        <button class="btn-primary" onclick="startQuiz()">Begin Test</button>
+    </div>
+
+    <!-- Quiz -->
     <div id="quiz-area">
         <div id="timer">30:00</div>
-        <form id="quizForm">
-            <div id="questions-container"></div>
-            <button type="button" id="submit-btn" onclick="calculateScore()">Submit Test</button>
-        </form>
+        <div id="questions-container"></div>
+        <button type="button" id="submit-btn" onclick="calculateScore()">Submit Test</button>
     </div>
 
-    <!-- 3. Result Screen (Retake Option Hata Diya Hai) -->
+    <!-- Results -->
     <div id="result">
-        <h2 style="color: #202124;">Test Submission Successful</h2>
-        <div class="score-box" id="final-score">0</div>
-        <p class="percentage-text" id="percentage"></p>
-     
+        <h2 id="displayName" style="text-align: center;"></h2>
+        <div class="score-box" id="final-score"></div>
+        <p id="percentage" style="text-align: center; font-weight: bold;"></p>
+        
+        <div style="margin-top: 40px;">
+            <h3 style="text-align: center;">Attempt Review</h3>
+            <div id="full-review-list"></div>
+        </div>
     </div>
 </div>
 
@@ -102,8 +118,19 @@
         ["Patient reached out-of-pocket max. Next claim paid by:", "Insurance 100%", ["Patient", "Insurance 100%", "Employer", "Provider"]]
     ];
 
-    function startQuiz() {
+    let studentName = "";
+    let timeLeft = 30 * 60;
+    let timerInterval;
+
+    function showNameScreen() {
         document.getElementById('start-screen').style.display = 'none';
+        document.getElementById('name-screen').style.display = 'block';
+    }
+
+    function startQuiz() {
+        studentName = document.getElementById('studentNameInput').value;
+        if (!studentName.trim()) { alert("Please enter your name."); return; }
+        document.getElementById('name-screen').style.display = 'none';
         document.getElementById('quiz-area').style.display = 'block';
         renderQuestions();
         startTimer();
@@ -116,26 +143,16 @@
             item[2].forEach(opt => {
                 optionsHTML += `<label><input type="radio" name="q${index}" value="${opt}"> ${opt}</label>`;
             });
-            container.innerHTML += `<div class="question">
-                <p><strong>Q${index + 1}: ${item[0]}</strong></p>
-                <div class="options">${optionsHTML}</div>
-            </div>`;
+            container.innerHTML += `<div class="question"><p>Q${index + 1}: ${item[0]}</p><div class="options">${optionsHTML}</div></div>`;
         });
     }
 
-    let timeLeft = 30 * 60;
-    let timerInterval;
-
     function startTimer() {
-        const timerDisplay = document.getElementById('timer');
         timerInterval = setInterval(() => {
             let mins = Math.floor(timeLeft / 60);
             let secs = timeLeft % 60;
-            timerDisplay.innerHTML = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-            if (timeLeft <= 0) {
-                clearInterval(timerInterval);
-                calculateScore();
-            }
+            document.getElementById('timer').innerHTML = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+            if (timeLeft <= 0) calculateScore();
             timeLeft--;
         }, 1000);
     }
@@ -143,18 +160,29 @@
     function calculateScore() {
         clearInterval(timerInterval);
         let score = 0;
+        let reviewHTML = "";
+
         questionsData.forEach((item, index) => {
             const selected = document.querySelector(`input[name="q${index}"]:checked`);
-            if (selected && selected.value === item[1]) {
-                score++;
-            }
+            const userAnswer = selected ? selected.value : "Not Attempted";
+            const isCorrect = (userAnswer === item[1]);
+            
+            if (isCorrect) score++;
+
+            reviewHTML += `
+                <div class="review-item ${isCorrect ? 'correct-review' : 'wrong-review'}">
+                    <span class="status-badge ${isCorrect ? 'badge-correct' : 'badge-wrong'}">${isCorrect ? 'Correct' : 'Wrong'}</span>
+                    <div style="font-weight: bold; margin-bottom: 5px;">Question ${index+1}: ${item[0]}</div>
+                    <div>Your Choice: <span style="font-weight: bold; color: ${isCorrect ? '#2f855a' : '#c53030'};">${userAnswer}</span></div>
+                </div>`;
         });
 
         document.getElementById('quiz-area').style.display = 'none';
-        document.getElementById('timer').style.display = 'none';
         document.getElementById('result').style.display = 'block';
-        document.getElementById('final-score').innerText = `${score} / ${questionsData.length}`;
-        document.getElementById('percentage').innerText = `Success Rate: ${(score/questionsData.length*100).toFixed(0)}%`;
+        document.getElementById('displayName').innerText = studentName;
+        document.getElementById('final-score').innerText = `${score} / 40`;
+        document.getElementById('percentage').innerText = `Result: ${(score/40*100).toFixed(0)}%`;
+        document.getElementById('full-review-list').innerHTML = reviewHTML;
         window.scrollTo(0,0);
     }
 </script>
