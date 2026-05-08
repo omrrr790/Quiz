@@ -9,21 +9,23 @@
         .container { max-width: 800px; margin: auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
         h1 { text-align: center; color: #1a73e8; margin-bottom: 30px; }
         
-        /* Start Screen Styling */
         #start-screen { text-align: center; padding: 50px 20px; }
         .btn-start { background-color: #1a73e8; color: white; padding: 15px 40px; border: none; border-radius: 30px; font-size: 20px; cursor: pointer; transition: 0.3s; }
         .btn-start:hover { background-color: #1557b0; transform: scale(1.05); }
 
-        /* Quiz Styling */
         #quiz-area { display: none; }
-        #timer { position: fixed; top: 20px; right: 20px; background: #d93025; color: white; padding: 12px 25px; border-radius: 50px; font-weight: bold; font-size: 22px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+        #timer { position: fixed; top: 20px; right: 20px; background: #d93025; color: white; padding: 12px 25px; border-radius: 50px; font-weight: bold; font-size: 22px; box-shadow: 0 4px 10px rgba(0,0,0,0.2); z-index: 1000; }
         .question { margin-bottom: 30px; padding: 20px; border-left: 5px solid #1a73e8; background: #f8f9fa; border-radius: 4px; }
-        .options label { display: block; margin: 10px 0; padding: 10px; cursor: pointer; background: white; border: 1px solid #ddd; border-radius: 8px; transition: 0.2s; }
+        .options label { display: block; margin: 10px 0; padding: 12px; cursor: pointer; background: white; border: 1px solid #ddd; border-radius: 8px; transition: 0.2s; }
         .options label:hover { background: #e8f0fe; border-color: #1a73e8; }
         
-        #submit-btn { width: 100%; padding: 18px; background: #34a853; color: white; border: none; border-radius: 8px; font-size: 20px; cursor: pointer; margin-top: 20px; }
-        #result { display: none; text-align: center; padding: 40px; border-radius: 12px; }
-        .score-box { font-size: 48px; font-weight: bold; color: #1a73e8; }
+        #submit-btn { width: 100%; padding: 18px; background: #34a853; color: white; border: none; border-radius: 8px; font-size: 20px; cursor: pointer; margin-top: 20px; font-weight: bold; }
+        #submit-btn:hover { background: #2d8e47; }
+
+        #result { display: none; text-align: center; padding: 60px 20px; border-radius: 12px; }
+        .score-box { font-size: 64px; font-weight: bold; color: #1a73e8; margin: 20px 0; }
+        .percentage-text { font-size: 24px; color: #5f6368; margin-bottom: 10px; }
+        .completion-msg { font-size: 20px; color: #34a853; font-weight: 500; }
     </style>
 </head>
 <body>
@@ -34,7 +36,7 @@
         <h1>Medical Billing & RCM Test</h1>
         <p><strong>Total Questions:</strong> 40</p>
         <p><strong>Time Limit:</strong> 30 Minutes</p>
-
+    
         <button class="btn-start" onclick="startQuiz()">Start Quiz Now</button>
     </div>
 
@@ -47,17 +49,16 @@
         </form>
     </div>
 
-    <!-- 3. Result Screen -->
+    <!-- 3. Result Screen (Retake Option Hata Diya Hai) -->
     <div id="result">
-        <h2>Result</h2>
+        <h2 style="color: #202124;">Test Submission Successful</h2>
         <div class="score-box" id="final-score">0</div>
-        <p id="percentage"></p>
-        <button class="btn-start" onclick="location.reload()" style="margin-top:20px; font-size: 16px;">Retake Test</button>
+        <p class="percentage-text" id="percentage"></p>
+     
     </div>
 </div>
 
 <script>
-    // Data (Questions & Answers)
     const questionsData = [
         ["What is the primary purpose of Revenue Cycle Management (RCM)?", "Managing financial flow from patient registration to payment collection", ["Managing hospital construction", "Tracking employee attendance", "Managing financial flow from patient registration to payment collection", "Hiring healthcare providers"]],
         ["Which platform is commonly used for eligibility verification?", "Availity", ["PECOS", "Availity", "CAQH", "OpenEMR"]],
@@ -123,14 +124,16 @@
     }
 
     let timeLeft = 30 * 60;
+    let timerInterval;
+
     function startTimer() {
         const timerDisplay = document.getElementById('timer');
-        const interval = setInterval(() => {
+        timerInterval = setInterval(() => {
             let mins = Math.floor(timeLeft / 60);
             let secs = timeLeft % 60;
             timerDisplay.innerHTML = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
             if (timeLeft <= 0) {
-                clearInterval(interval);
+                clearInterval(timerInterval);
                 calculateScore();
             }
             timeLeft--;
@@ -138,6 +141,7 @@
     }
 
     function calculateScore() {
+        clearInterval(timerInterval);
         let score = 0;
         questionsData.forEach((item, index) => {
             const selected = document.querySelector(`input[name="q${index}"]:checked`);
@@ -147,6 +151,7 @@
         });
 
         document.getElementById('quiz-area').style.display = 'none';
+        document.getElementById('timer').style.display = 'none';
         document.getElementById('result').style.display = 'block';
         document.getElementById('final-score').innerText = `${score} / ${questionsData.length}`;
         document.getElementById('percentage').innerText = `Success Rate: ${(score/questionsData.length*100).toFixed(0)}%`;
