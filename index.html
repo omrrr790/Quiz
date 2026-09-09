@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Medical Billing Quiz</title>
+    <title>HRM MCQs Quiz</title>
     <style>
         body { font-family: 'Segoe UI', sans-serif; background-color: #f0f2f5; padding: 20px; color: #202124; }
         .container { max-width: 850px; margin: auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
@@ -36,13 +36,13 @@
 
 <div class="container">
     <div class="header-box">
-        <h1>Medical Billing Course</h1>
-        <h3>Batch-4 Quiz #1</h3>
+        <h1>HRM MCQs</h1>
+        <h3>HR Fundamentals — Session 1 (Slides 1-10)</h3>
     </div>
 
     <!-- Start -->
     <div id="start-screen" style="text-align: center;">
-        <p>Total MCQs: 40 | Marks: 40 | Time: 30 Mins</p>
+        <p>Total MCQs: 10 | Marks: 10 | Time: 10 Mins</p>
         <button class="btn-primary" onclick="showNameScreen()">Start Quiz</button>
     </div>
 
@@ -56,7 +56,7 @@
 
     <!-- Quiz -->
     <div id="quiz-area">
-        <div id="timer">30:00</div>
+        <div id="timer">10:00</div>
         <div id="questions-container"></div>
         <button type="button" id="submit-btn" onclick="calculateScore()">Submit Test</button>
     </div>
@@ -76,51 +76,43 @@
 
 <script>
     const questionsData = [
-        ["What is the primary purpose of Revenue Cycle Management (RCM)?", "Managing financial flow from patient registration to payment collection", ["Managing hospital construction", "Tracking employee attendance", "Managing financial flow from patient registration to payment collection", "Hiring healthcare providers"]],
-        ["Which platform is commonly used for eligibility verification?", "Availity", ["PECOS", "Availity", "CAQH", "OpenEMR"]],
-        ["What does NPI stand for?", "National Provider Identifier", ["National Patient Insurance", "National Provider Identifier", "New Provider Index", "National Payment Information"]],
-        ["How many digits are in an NPI number?", "10", ["8", "9", "10", "12"]],
-        ["Which document is required for prescribing controlled substances?", "DEA Certificate", ["Passport", "DEA Certificate", "Utility bill", "Bank statement"]],
-        ["What is CAQH ProView used for?", "Provider credentialing database", ["Patient scheduling", "Provider credentialing database", "Billing denial management", "Insurance payment posting"]],
-        ["Which system is mandatory for Medicare enrollment?", "PECOS", ["Availity", "PECOS", "CAQH", "EMR system"]],
-        ["A provider who has a contract with insurance is called:", "In-network provider", ["Out-of-network provider", "In-network provider", "Non-participating provider", "Referring provider"]],
-        ["PTAN is issued by:", "MAC (Medicare contractor)", ["Commercial insurance", "MAC (Medicare contractor)", "Patient portal", "Employer"]],
-        ["Who performs the medical service?", "Rendering provider", ["Billing provider", "Rendering provider", "Referring provider", "Insurance company"]],
-        ["Who submits claims to insurance?", "Billing provider", ["Rendering provider", "Billing provider", "Supervising provider", "Patient"]],
-        ["A doctor who refers a patient to a specialist is called:", "Referring provider", ["Attending provider", "Supervising provider", "Referring provider", "Billing provider"]],
-        ["Medicare Part A covers:", "Hospital services", ["Prescription drugs", "Hospital services", "Dental care", "Vision care"]],
-        ["Medicare Part D covers:", "Prescription drugs", ["Hospital care", "Doctor visits", "Prescription drugs", "Emergency care"]],
-        ["Medicaid is mainly for:", "Low-income individuals", ["High-income individuals", "Low-income individuals", "Military personnel", "Foreign tourists"]],
-        ["TRICARE serves:", "Military members and families", ["Students", "Military members and families", "Private employees", "Senior citizens only"]],
-        ["Which is a commercial payer?", "Aetna", ["Medicare", "Medicaid", "Aetna", "TRICARE"]],
-        ["HMO plans require:", "PCP referral", ["No network", "PCP referral", "No insurance card", "Cash-only payment"]],
-        ["PPO plans allow:", "Flexibility to see out-of-network providers", ["Only emergency visits", "No specialists", "Flexibility to see out-of-network providers", "Only hospital visits"]],
-        ["EPO plans generally:", "Cover only in-network providers", ["Cover out-of-network care", "Require referrals always", "Cover only in-network providers", "Are government programs"]],
-        ["A patient returning after 4 years is:", "New patient", ["Established patient", "New patient", "Emergency patient", "Walk-in patient"]],
-        ["Wave scheduling means:", "Many patients at same time slot", ["One patient per hour", "Many patients at same time slot", "Only emergency patients", "No appointments"]],
-        ["Double booking means:", "Booking two patients at same time", ["Canceling appointments", "Booking two patients at same time", "Booking once a week", "Scheduling online only"]],
-        ["Cluster scheduling is:", "Grouping similar appointments together", ["Random scheduling", "Grouping similar appointments together", "Emergency-only scheduling", "Walk-in system"]],
-        ["First step of RCM is:", "Patient registration", ["Claim submission", "Coding", "Patient registration", "Payment posting"]],
-        ["During registration, staff collect:", "Insurance and ID", ["Credit score", "Insurance and ID", "Driving license only", "Employment letter"]],
-        ["Eligibility verification checks:", "Insurance active status", ["Doctor salary", "Insurance active status", "Hospital profit", "Patient job"]],
-        ["Eligibility verification is done:", "24–48 hours before visit", ["After treatment", "24–48 hours before visit", "After claim denial", "After payment"]],
-        ["Co-payment is:", "Fixed amount per visit", ["Annual fee", "Fixed amount per visit", "Percentage of bill", "Insurance premium"]],
-        ["Deductible means:", "Amount paid before insurance starts", ["Monthly payment", "Amount paid before insurance starts", "Refund amount", "Bonus payment"]],
-        ["Co-insurance is:", "Percentage patient pays after deductible", ["Fixed fee", "Percentage patient pays after deductible", "Full payment by insurance", "Annual tax"]],
-        ["Out-of-pocket maximum is:", "Annual limit patient pays", ["Minimum payment", "Annual limit patient pays", "Insurance penalty", "Provider fee"]],
-        ["Insurance inactive during visit results in:", "Claim denial", ["Fast approval", "Claim denial", "Bonus payment", "Automatic coverage"]],
-        ["NP performs surgery under supervision. Physician role is:", "Supervising provider", ["Billing provider", "Supervising provider", "Referring provider", "Patient"]],
-        ["Provider not enrolled in PECOS submits Medicare claim. Outcome:", "Denied", ["Paid instantly", "Denied", "Increased payment", "Reduced deductible"]],
-        ["HMO patient sees specialist without referral. Likely result:", "Claim denial", ["Full coverage", "Claim denial", "Extra bonus", "No billing required"]],
-        ["Provider agrees to discounted rates. This is:", "In-network", ["Out-of-network", "In-network", "Self-pay", "Fraud"]],
-        ["Patient has $1000 deductible and $600 bill. Payment:", "$600", ["$0", "$600", "$400", "$1000"]],
-        ["CV has employment gaps during credentialing. Result:", "Delay in credentialing", ["Fast approval", "Delay in credentialing", "Immediate PTAN", "Automatic approval"]],
-        ["Patient reached out-of-pocket max. Next claim paid by:", "Insurance 100%", ["Patient", "Insurance 100%", "Employer", "Provider"]]
+        ["According to the definition used in the session, Human Resource Management is best described as:", "A strategic approach to managing an organization's most valuable asset — its people", ["A clerical department that only maintains employee attendance records", "A strategic approach to managing an organization's most valuable asset — its people", "A legal team responsible only for handling employee disputes", "A finance function that calculates monthly payroll"]],
+        ["The HRM definition is built around four verbs. Which set below matches them?", "Acquire, Develop, Compensate, Retain", ["Hire, Train, Pay, Fire", "Recruit, Assess, Promote, Terminate", "Acquire, Develop, Compensate, Retain", "Plan, Organize, Lead, Control"]],
+        ["Which is the correct chronological order of HRM's historical evolution?", "Welfare Stage → Personnel Management → HRM Stage → Strategic HRM", ["Personnel Management → Welfare Stage → HRM Stage → Strategic HRM", "Welfare Stage → Personnel Management → HRM Stage → Strategic HRM", "HRM Stage → Welfare Stage → Strategic HRM → Personnel Management", "Strategic HRM → HRM Stage → Personnel Management → Welfare Stage"]],
+        ["In the mid-1900s 'Personnel Management' stage, the role was mainly characterized by:", "Highly administrative work — payroll, compliance, discipline and record-keeping", ["Data analytics integrated into business planning", "Motivation, alignment and culture taking centre stage", "Highly administrative work — payroll, compliance, discipline and record-keeping", "Basic worker welfare, safety and housing to avoid labour unrest"]],
+        ["The 'Scope of HRM' slide divides the employment relationship into three phases. Which of these correctly belongs to the 'During Employment' phase?", "Performance management", ["Workforce planning", "Performance management", "Retirement", "Resignations & separations"]],
+        ["In the Personnel Management vs. HRM comparison, how does traditional Personnel Management typically view employees?", "As economic tools — an operating cost to minimize", ["As valuable human assets to develop", "As business partners and change agents", "As economic tools — an operating cost to minimize", "As strategic contributors to organizational culture"]],
+        ["In the Interloop Limited case study, what actually drove the shift from Personnel Management to HRM?", "Global compliance demands from buyers such as Nike and Adidas", ["A change in government minimum wage law", "Global compliance demands from buyers such as Nike and Adidas", "A sudden shortage of factory workers", "Pressure from a labour union strike"]],
+        ["Which pair correctly represents the 'two gates' of the employment relationship among the Five Core HR Functions?", "Acquisition and Separation", ["Development and Maintenance", "Compensation and Development", "Acquisition and Separation", "Maintenance and Compensation"]],
+        ["The Acquisition function follows which three-step process, as shown in the slide?", "Plan → Source → Select", ["Identify → Deliver → Evaluate", "Plan → Source → Select", "Notify → Hand over → Settle", "Evaluate → Benchmark → Reward"]],
+        ["What is flagged as the most common failure point within the Acquisition function?", "Unstructured interviews, which feel efficient but predict on-the-job performance poorly", ["Poor job posting design", "Excessive use of campus hiring", "Unstructured interviews, which feel efficient but predict on-the-job performance poorly", "Delayed background verification"]]
     ];
 
+    // Paste your Google Apps Script Web App URL here (see instructions below the quiz)
+    const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbxGZhQCV2OJeqx28hyi18_zYAMpPFQ2I_NXRCjsQV21gn4olnqQ2ExoEiCIrQ-l61_5ow/exec";
+
     let studentName = "";
-    let timeLeft = 30 * 60;
+    let timeLeft = 10 * 60;
     let timerInterval;
+
+    function sendToGoogleSheet(name, score, total) {
+        if (!GOOGLE_SHEET_URL || GOOGLE_SHEET_URL.indexOf("PASTE_YOUR") === 0) {
+            console.warn("Google Sheet URL not set — skipping sheet submission.");
+            return;
+        }
+        const payload = new URLSearchParams();
+        payload.append("name", name);
+        payload.append("score", score);
+        payload.append("total", total);
+        payload.append("date", new Date().toLocaleString());
+
+        fetch(GOOGLE_SHEET_URL, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: payload.toString()
+        }).catch(err => console.error("Sheet submission failed:", err));
+    }
 
     function showNameScreen() {
         document.getElementById('start-screen').style.display = 'none';
@@ -174,16 +166,19 @@
                     <span class="status-badge ${isCorrect ? 'badge-correct' : 'badge-wrong'}">${isCorrect ? 'Correct' : 'Wrong'}</span>
                     <div style="font-weight: bold; margin-bottom: 5px;">Question ${index+1}: ${item[0]}</div>
                     <div>Your Choice: <span style="font-weight: bold; color: ${isCorrect ? '#2f855a' : '#c53030'};">${userAnswer}</span></div>
+                    ${isCorrect ? '' : `<div>Correct Answer: <span style="font-weight: bold; color: #2f855a;">${item[1]}</span></div>`}
                 </div>`;
         });
 
         document.getElementById('quiz-area').style.display = 'none';
         document.getElementById('result').style.display = 'block';
         document.getElementById('displayName').innerText = studentName;
-        document.getElementById('final-score').innerText = `${score} / 40`;
-        document.getElementById('percentage').innerText = `Result: ${(score/40*100).toFixed(0)}%`;
+        document.getElementById('final-score').innerText = `${score} / 10`;
+        document.getElementById('percentage').innerText = `Result: ${(score/10*100).toFixed(0)}%`;
         document.getElementById('full-review-list').innerHTML = reviewHTML;
         window.scrollTo(0,0);
+
+        sendToGoogleSheet(studentName, score, 10);
     }
 </script>
 
