@@ -37,7 +37,7 @@
 <div class="container">
     <div class="header-box">
         <h1>HRM MCQs</h1>
-        <h3>HR Fundamentals — Module A (1-10)</h3>
+        <h3>HR Fundamentals — Session 1 (Slides 10-20)</h3>
     </div>
 
     <!-- Start -->
@@ -76,16 +76,16 @@
 
 <script>
     const questionsData = [
-        ["According to the definition used in the session, Human Resource Management is best described as:", "A strategic approach to managing an organization's most valuable asset — its people", ["A clerical department that only maintains employee attendance records", "A strategic approach to managing an organization's most valuable asset — its people", "A legal team responsible only for handling employee disputes", "A finance function that calculates monthly payroll"]],
-        ["The HRM definition is built around four verbs. Which set below matches them?", "Acquire, Develop, Compensate, Retain", ["Hire, Train, Pay, Fire", "Recruit, Assess, Promote, Terminate", "Acquire, Develop, Compensate, Retain", "Plan, Organize, Lead, Control"]],
-        ["Which is the correct chronological order of HRM's historical evolution?", "Welfare Stage → Personnel Management → HRM Stage → Strategic HRM", ["Personnel Management → Welfare Stage → HRM Stage → Strategic HRM", "Welfare Stage → Personnel Management → HRM Stage → Strategic HRM", "HRM Stage → Welfare Stage → Strategic HRM → Personnel Management", "Strategic HRM → HRM Stage → Personnel Management → Welfare Stage"]],
-        ["In the mid-1900s 'Personnel Management' stage, the role was mainly characterized by:", "Highly administrative work — payroll, compliance, discipline and record-keeping", ["Data analytics integrated into business planning", "Motivation, alignment and culture taking centre stage", "Highly administrative work — payroll, compliance, discipline and record-keeping", "Basic worker welfare, safety and housing to avoid labour unrest"]],
-        ["The 'Scope of HRM' slide divides the employment relationship into three phases. Which of these correctly belongs to the 'During Employment' phase?", "Performance management", ["Workforce planning", "Performance management", "Retirement", "Resignations & separations"]],
-        ["In the Personnel Management vs. HRM comparison, how does traditional Personnel Management typically view employees?", "As economic tools — an operating cost to minimize", ["As valuable human assets to develop", "As business partners and change agents", "As economic tools — an operating cost to minimize", "As strategic contributors to organizational culture"]],
-        ["In the Interloop Limited case study, what actually drove the shift from Personnel Management to HRM?", "Global compliance demands from buyers such as Nike and Adidas", ["A change in government minimum wage law", "Global compliance demands from buyers such as Nike and Adidas", "A sudden shortage of factory workers", "Pressure from a labour union strike"]],
-        ["Which pair correctly represents the 'two gates' of the employment relationship among the Five Core HR Functions?", "Acquisition and Separation", ["Development and Maintenance", "Compensation and Development", "Acquisition and Separation", "Maintenance and Compensation"]],
-        ["The Acquisition function follows which three-step process, as shown in the slide?", "Plan → Source → Select", ["Identify → Deliver → Evaluate", "Plan → Source → Select", "Notify → Hand over → Settle", "Evaluate → Benchmark → Reward"]],
-        ["What is flagged as the most common failure point within the Acquisition function?", "Unstructured interviews, which feel efficient but predict on-the-job performance poorly", ["Poor job posting design", "Excessive use of campus hiring", "Unstructured interviews, which feel efficient but predict on-the-job performance poorly", "Delayed background verification"]]
+        ["In the Development function, what does the session warn training becomes if it is never evaluated?", "A cost centre", ["A recruitment tool", "A cost centre", "A compliance requirement", "A retention strategy"]],
+        ["According to the Compensation function slide, reward systems must be defensible on which two fronts simultaneously?", "Internally equitable across roles and externally competitive against the market", ["Legally compliant and digitally tracked", "Internally equitable across roles and externally competitive against the market", "Fast to process and easy to audit", "Popular with employees and approved by finance"]],
+        ["What is described as the 'real scoreboard' for the Maintenance function?", "Attrition, absenteeism and accidents", ["Training completion rates", "Number of new hires", "Attrition, absenteeism and accidents", "Payroll accuracy"]],
+        ["The Separation function corresponds to which lifecycle phase?", "Post-Employment", ["Pre-Employment", "During Employment", "Post-Employment", "It spans all three phases equally"]],
+        ["Which of the following is listed as a 'con' of the Centralized HR Model?", "Slow decision-making, as approvals travel up and back down the chain", ["Inconsistent enforcement across units", "High duplicate costs", "Slow decision-making, as approvals travel up and back down the chain", "Policies not standardized across the organization"]],
+        ["The Decentralized HR Model is described as the 'best fit' for which kind of business?", "Multi-city, multi-format businesses with fast-moving local staffing", ["Single-site or tightly regulated organizations needing uniformity", "Multi-city, multi-format businesses with fast-moving local staffing", "Small businesses with fewer than 10 employees", "Organizations with only one HR function"]],
+        ["In the local conglomerates case study, why does Engro Corporation use a centralized Shared Services model?", "Standardization is the goal — one payroll engine and one policy set across subsidiaries", ["Speed is the goal, since staffing must track regional labour supply", "Standardization is the goal — one payroll engine and one policy set across subsidiaries", "It has no other business units to manage", "It is required by provincial labour law"]],
+        ["What is the correct order of stages in the HR Lifecycle Mapping slide?", "Requisition → Hire → Onboard → Perform → Exit", ["Hire → Requisition → Onboard → Exit → Perform", "Requisition → Hire → Onboard → Perform → Exit", "Onboard → Requisition → Perform → Hire → Exit", "Requisition → Onboard → Hire → Perform → Exit"]],
+        ["Widespread evasion of PESSI/SESSI social security and EOBI pension contributions in Pakistan is identified in the slides as an example of:", "Labour law non-compliance", ["Low documentation culture", "Labour law non-compliance", "Workforce informality", "Strategic HRM adoption"]],
+        ["In Dave Ulrich's Four-Role Model, which role is responsible for 'flawless execution of infrastructure — payroll, compliance and benefits delivery'?", "Administrative Expert", ["Strategic Partner", "Change Agent", "Administrative Expert", "Employee Champion"]]
     ];
 
     // Paste your Google Apps Script Web App URL here (see instructions below the quiz)
@@ -104,6 +104,7 @@
         payload.append("name", name);
         payload.append("score", score);
         payload.append("total", total);
+        payload.append("quiz", "Part 2 (Slides 10-20)");
         payload.append("date", new Date().toLocaleString());
 
         fetch(GOOGLE_SHEET_URL, {
