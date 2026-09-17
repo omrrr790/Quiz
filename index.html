@@ -3,24 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HRM MCQs Quiz</title>
+    <title>Module 2A Quiz</title>
     <style>
         body { font-family: 'Segoe UI', sans-serif; background-color: #f0f2f5; padding: 20px; color: #202124; }
         .container { max-width: 850px; margin: auto; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
-        .header-box { text-align: center; border-bottom: 2px solid #1a73e8; margin-bottom: 30px; padding-bottom: 10px; }
-        
+        .header-box { text-align: center; border-bottom: 2px solid #2f6f4f; margin-bottom: 30px; padding-bottom: 10px; }
+        .header-box h1 { color: #1e4d34; margin-bottom: 4px; }
+        .header-box h3 { color: #3d3d3d; font-weight: normal; }
+
         #name-screen, #quiz-area, #result { display: none; }
 
         /* General UI */
-        .btn-primary { background-color: #1a73e8; color: white; padding: 15px 60px; border: none; border-radius: 30px; font-size: 18px; cursor: pointer; font-weight: bold; }
+        .btn-primary { background-color: #2f6f4f; color: white; padding: 15px 60px; border: none; border-radius: 30px; font-size: 18px; cursor: pointer; font-weight: bold; }
         input[type="text"] { width: 80%; padding: 15px; border: 2px solid #ddd; border-radius: 8px; font-size: 18px; margin-bottom: 20px; }
 
         /* Quiz UI */
         #timer { position: fixed; top: 20px; right: 20px; background: #d93025; color: white; padding: 12px 25px; border-radius: 50px; font-weight: bold; font-size: 22px; z-index: 1000; }
-        .question { margin-bottom: 30px; padding: 25px; border-left: 6px solid #1a73e8; background: #f8f9fa; border-radius: 8px; }
+        .question { margin-bottom: 30px; padding: 25px; border-left: 6px solid #2f6f4f; background: #f8f9fa; border-radius: 8px; }
         .options label { display: block; margin: 12px 0; padding: 14px; cursor: pointer; background: white; border: 1px solid #ddd; border-radius: 10px; }
-        
-        #submit-btn { width: 100%; padding: 20px; background: #34a853; color: white; border: none; border-radius: 10px; font-size: 22px; cursor: pointer; font-weight: bold; }
+
+        #submit-btn { width: 100%; padding: 20px; background: #e8a33d; color: #1e4d34; border: none; border-radius: 10px; font-size: 22px; cursor: pointer; font-weight: bold; }
 
         /* Result/Review UI */
         .review-item { margin-bottom: 15px; padding: 15px; border-radius: 8px; border-width: 1px; border-style: solid; }
@@ -29,15 +31,15 @@
         .status-badge { font-weight: bold; text-transform: uppercase; font-size: 12px; padding: 4px 10px; border-radius: 4px; margin-bottom: 8px; display: inline-block; }
         .badge-correct { background: #c6f6d5; color: #22543d; }
         .badge-wrong { background: #fed7d7; color: #822727; }
-        .score-box { font-size: 60px; font-weight: bold; color: #1a73e8; text-align: center; }
+        .score-box { font-size: 60px; font-weight: bold; color: #2f6f4f; text-align: center; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <div class="header-box">
-        <h1>HRM MCQs</h1>
-        <h3>HR Fundamentals — Module B (10-20)</h3>
+        <h1>Module 2A Quiz</h1>
+        <h3>Manpower Planning &amp; Job Analysis</h3>
     </div>
 
     <!-- Start -->
@@ -66,7 +68,7 @@
         <h2 id="displayName" style="text-align: center;"></h2>
         <div class="score-box" id="final-score"></div>
         <p id="percentage" style="text-align: center; font-weight: bold;"></p>
-        
+
         <div style="margin-top: 40px;">
             <h3 style="text-align: center;">Attempt Review</h3>
             <div id="full-review-list"></div>
@@ -76,16 +78,16 @@
 
 <script>
     const questionsData = [
-        ["In the Development function, what does the session warn training becomes if it is never evaluated?", "A cost centre", ["A recruitment tool", "A cost centre", "A compliance requirement", "A retention strategy"]],
-        ["According to the Compensation function slide, reward systems must be defensible on which two fronts simultaneously?", "Internally equitable across roles and externally competitive against the market", ["Legally compliant and digitally tracked", "Internally equitable across roles and externally competitive against the market", "Fast to process and easy to audit", "Popular with employees and approved by finance"]],
-        ["What is described as the 'real scoreboard' for the Maintenance function?", "Attrition, absenteeism and accidents", ["Training completion rates", "Number of new hires", "Attrition, absenteeism and accidents", "Payroll accuracy"]],
-        ["The Separation function corresponds to which lifecycle phase?", "Post-Employment", ["Pre-Employment", "During Employment", "Post-Employment", "It spans all three phases equally"]],
-        ["Which of the following is listed as a 'con' of the Centralized HR Model?", "Slow decision-making, as approvals travel up and back down the chain", ["Inconsistent enforcement across units", "High duplicate costs", "Slow decision-making, as approvals travel up and back down the chain", "Policies not standardized across the organization"]],
-        ["The Decentralized HR Model is described as the 'best fit' for which kind of business?", "Multi-city, multi-format businesses with fast-moving local staffing", ["Single-site or tightly regulated organizations needing uniformity", "Multi-city, multi-format businesses with fast-moving local staffing", "Small businesses with fewer than 10 employees", "Organizations with only one HR function"]],
-        ["In the local conglomerates case study, why does Engro Corporation use a centralized Shared Services model?", "Standardization is the goal — one payroll engine and one policy set across subsidiaries", ["Speed is the goal, since staffing must track regional labour supply", "Standardization is the goal — one payroll engine and one policy set across subsidiaries", "It has no other business units to manage", "It is required by provincial labour law"]],
-        ["What is the correct order of stages in the HR Lifecycle Mapping slide?", "Requisition → Hire → Onboard → Perform → Exit", ["Hire → Requisition → Onboard → Exit → Perform", "Requisition → Hire → Onboard → Perform → Exit", "Onboard → Requisition → Perform → Hire → Exit", "Requisition → Onboard → Hire → Perform → Exit"]],
-        ["Widespread evasion of PESSI/SESSI social security and EOBI pension contributions in Pakistan is identified in the slides as an example of:", "Labour law non-compliance", ["Low documentation culture", "Labour law non-compliance", "Workforce informality", "Strategic HRM adoption"]],
-        ["In Dave Ulrich's Four-Role Model, which role is responsible for 'flawless execution of infrastructure — payroll, compliance and benefits delivery'?", "Administrative Expert", ["Strategic Partner", "Change Agent", "Administrative Expert", "Employee Champion"]]
+        ["On the title slide, Module 2A's Key Focus is on human assets across which four actions?", "Acquiring, utilizing, improving, and retaining", ["Recruiting, training, evaluating, and promoting", "Acquiring, utilizing, improving, and retaining", "Hiring, paying, disciplining, and terminating", "Sourcing, onboarding, appraising, and offboarding"]],
+        ["According to the Introduction slide, what is the Core Goal of Manpower Planning?", "Maximize organizational efficiency and align human assets with strategic goals", ["Minimize hiring costs at any expense", "Maximize organizational efficiency and align human assets with strategic goals", "Ensure 100% employee retention every year", "Replace all internal promotions with external hires"]],
+        ["What is the first step in the Manpower Planning Process?", "Strategy Analysis — aligning HR needs with business goals", ["Gap Analysis", "Supply Forecasting", "Strategy Analysis — aligning HR needs with business goals", "Action Planning & Monitoring"]],
+        ["Which forecasting tool analyzes historical operational metrics over past years to project future staffing, as illustrated by the Interloop Limited example?", "Trend Analysis", ["Ratio Analysis", "Trend Analysis", "Scatterplot Method", "Gap Analysis"]],
+        ["Shaukat Khanum Hospital maintains a 1:4 nurse-to-bed ratio. How many nurses per shift are required for a new 40-bed ward?", "10 nurses per shift", ["4 nurses per shift", "40 nurses per shift", "10 nurses per shift", "8 nurses per shift"]],
+        ["In the Scatterplot example, why does Daraz Pakistan plot monthly order deliveries against warehouse staff?", "To determine temporary staffing needs for the \u201c11.11\u201d sale event", ["To calculate annual employee bonuses", "To forecast next year's total revenue", "To determine temporary staffing needs for the \u201c11.11\u201d sale event", "To plan the warehouse's physical layout"]],
+        ["In the Mobilink & Warid (Jazz) merger case study, how was the resulting workforce surplus managed?", "Through Voluntary Separation Schemes (VSS)", ["Through mandatory layoffs", "Through Voluntary Separation Schemes (VSS)", "Through across-the-board pay cuts", "By outsourcing all overlapping roles"]],
+        ["On the Manpower Requisition Form (MRF), what does the 'Financial Impact' component capture?", "Budgeted salary, benefits tier, and cost center code", ["Title, department, grade/level, and location", "Education, experience, core skills, and start date", "Budgeted salary, benefits tier, and cost center code", "Budgeted headcount and business justification"]],
+        ["What is the correct order of approvals in the MRF Workflow?", "Line Manager \u2192 Department Head (HOD) \u2192 Finance Department \u2192 HR Manager / Director", ["HR Manager \u2192 Finance \u2192 Line Manager \u2192 HOD", "Line Manager \u2192 Department Head (HOD) \u2192 Finance Department \u2192 HR Manager / Director", "Finance Department \u2192 Line Manager \u2192 HOD \u2192 HR Manager", "Department Head \u2192 HR Manager \u2192 Line Manager \u2192 Finance"]],
+        ["According to the Job Analysis Overview slide, what are the two Key Outputs of Job Analysis?", "Job Descriptions (JD) and Person Specifications", ["Job Descriptions (JD) and Salary Bands", "Job Descriptions (JD) and Person Specifications", "Person Specifications and Training Plans", "Competency Matrix and Person Specifications"]]
     ];
 
     // Paste your Google Apps Script Web App URL here (see instructions below the quiz)
@@ -104,7 +106,7 @@
         payload.append("name", name);
         payload.append("score", score);
         payload.append("total", total);
-        payload.append("quiz", "Part 2 (Slides 10-20)");
+        payload.append("quiz", "Module 2A (Slides 1-9)");
         payload.append("date", new Date().toLocaleString());
 
         fetch(GOOGLE_SHEET_URL, {
@@ -159,7 +161,7 @@
             const selected = document.querySelector(`input[name="q${index}"]:checked`);
             const userAnswer = selected ? selected.value : "Not Attempted";
             const isCorrect = (userAnswer === item[1]);
-            
+
             if (isCorrect) score++;
 
             reviewHTML += `
